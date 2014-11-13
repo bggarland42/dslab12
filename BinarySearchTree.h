@@ -70,6 +70,9 @@ int BinarySearchTree<T>::getHeight()
 {
    //DO THIS
 
+   int result = getHeight(root);
+
+   return result;
 }
 
 template < class T >
@@ -77,6 +80,33 @@ int BinarySearchTree<T>::getHeight(TreeNode<T>* tNode)
 {
    //DO THIS
 
+   int result_1 = 0;
+   int result_2 = 0;
+
+   if(tNode == NULL)
+   {
+     return 0;
+     }
+
+   if(tNode->getLeft() != NULL)
+   {
+      result_1 = getHeight(tNode->getLeft());
+     }
+
+   if(tNode->getRight != NULL)
+   {
+      result_2 = getHeight(tNode->getRight());
+     }
+
+   if(result_1 >= result_2)
+   {
+     return result_1 + 1;
+     }
+
+   else
+   {
+     result_2 + 1;
+     }
 
 
 }
@@ -86,6 +116,9 @@ bool BinarySearchTree<T>::isBalanced()
 {
    //DO THIS
 
+   bool result = isBalanced(root);
+
+   return result;
 }
 
 template < class T >
@@ -93,9 +126,30 @@ bool BinarySearchTree<T>::isBalanced(TreeNode<T>* tNode)
 {
    //DO THIS
 
+   bool result_1;
+   bool result_2;
+
+   int left_height;
+   int right_height;
+   
+
+   if(tNode == NULL)
+   {
+     return true;
+     }
+
+    result_1 = isBalanced(tNode->getLeft());
+    result_2 = isBalanced(tNode->getRight());
 
 
+   if(result_1 == false || result_2 == false) return false;
 
+   left_height = getHeight(tNode->getLeft());
+   right_height = getHeight(tNode->getRight());
+
+   if(abs(left_height - right_height) < 2) return true;
+
+   return false;
 }
 
 template < class T >
@@ -104,21 +158,26 @@ BinarySearchTree<T>* BinarySearchTree<T>::minimize()
    T** items = toArray();
    BinarySearchTree<T>* bst = new BinarySearchTree<T>(compare_items, compare_keys);
    //DO THIS
+   
+   bst->minimize(items, 0, sze - 1);
 
-
-
-
+   return bst;
 }
 
 template < class T >
 void BinarySearchTree<T>::minimize(T** items, int first, int last)
 {
    //DO THIS (recursive minimize method)
+  
+  if(first < last)
+  {
+  int mid = first + ((last - first) / 2);
 
+  bst->insert(items[mid]);
 
-
-
-
+  minimize(items, 0, mid - 1);
+  minimize(items, mid + 1, sze - 1);
+  }
 }
 
 template < class T >
